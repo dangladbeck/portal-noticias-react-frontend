@@ -1,15 +1,12 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
 import MenuAdm from "../components/MenuAdm";
+import useLogin from "../hooks/useLogin";
 
 function Adm() {
-    const navigate = useNavigate();
+    const {verificarUsuarioLogado} = useLogin();
     // useEffect é executado no carregamento da página somente
     useEffect(() => {
-        const usuarioLogado = localStorage.getItem("usuarioLogado");
-        if (usuarioLogado != "sim") {
-            navigate("/login");
-        }
+        verificarUsuarioLogado();
     }, []);
 
     return (

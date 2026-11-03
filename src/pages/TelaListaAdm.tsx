@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MenuAdm from "../components/MenuAdm";
 import useAdministrador from "../hooks/useAdministrador";
 import { useNavigate } from "react-router";
+import useLogin from "../hooks/useLogin";
 
 function TelaListaAdm() {
+    const {verificarUsuarioLogado} = useLogin();
 
     const {buscarAdministradores, excluirAdministrador} = useAdministrador();
     const [listaAdministradores, setListaAdministadores] = useState(buscarAdministradores());
     const navigate = useNavigate();
+
+    useEffect(() => {
+        verificarUsuarioLogado();
+    });
 
     return(
         <>
