@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import type Administrador from "../interfaces/Administrador";
 
 function useLogin() {
     const [email, setEmail] = useState("");
@@ -10,7 +11,13 @@ function useLogin() {
     function realizarLogin(evento:any) {
         evento.preventDefault();
 
-        if (email == "adm@gmail.com" && senha == "123456") {
+        const listaAdministradores = JSON.parse(localStorage.getItem("listaAdministradores") || "[]");
+
+        const admin = listaAdministradores.find(
+            (adm:Administrador) => (adm.email == email && adm.senha == senha)
+        );
+
+        if (admin) {
             setMensagem("Login realizado com sucesso!");
             localStorage.setItem("usuarioLogado", "sim");
             setTimeout(() => {

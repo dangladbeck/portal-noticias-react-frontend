@@ -3,6 +3,7 @@ import type Administrador from "../interfaces/Administrador";
 import { useNavigate } from "react-router";
 
 function useAdministrador() {
+    const [id, setId] = useState("");
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
@@ -12,7 +13,7 @@ function useAdministrador() {
     function cadastrarAdministrador(event:React.SubmitEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        const administrador = {nome, email, senha};
+        const administrador:Administrador = {id: crypto.randomUUID(), nome, email, senha};
 
         const listaAdministradores = JSON.parse(localStorage.getItem("listaAdministradores") || "[]");
         listaAdministradores.push(administrador);
@@ -24,6 +25,7 @@ function useAdministrador() {
     }
 
     function limparCampos() {
+        setId("");
         setNome("");
         setEmail("");
         setSenha("");
@@ -35,19 +37,19 @@ function useAdministrador() {
         return listaAdministradores;
     }
 
-    function excluirAdministrador(email:string) {
+    function excluirAdministrador(id:string) {
         const listaAdministradores = buscarAdministradores();
-        const novaLista = listaAdministradores.filter((adm) => adm.email != email);
+        const novaLista = listaAdministradores.filter((adm) => adm.id != id);
         localStorage.setItem("listaAdministradores", JSON.stringify(novaLista));
     }
 
-    function alterarAdministrador(event:React.SubmitEvent<HTMLFormElement>, email:string) {
+    function alterarAdministrador(event:React.SubmitEvent<HTMLFormElement>, id:string) {
         event.preventDefault();
 
         const listaAdministradores = buscarAdministradores();
         const novaLista = listaAdministradores.map((adm) => {
-            if (adm.email == email) {
-                return {nome, email, senha};
+            if (adm.id == id) {
+                return {id, nome, email, senha};
             }
             return adm;
         });
@@ -59,6 +61,7 @@ function useAdministrador() {
     }
     
     return ({
+        id, setId,
         nome, setNome,
         email, setEmail,
         senha, setSenha,

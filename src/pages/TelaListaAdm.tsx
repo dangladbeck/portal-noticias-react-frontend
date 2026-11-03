@@ -11,7 +11,7 @@ function TelaListaAdm() {
 
     return(
         <>
-            <MenuAdm/>            
+            <MenuAdm/>
             <main id="conteudoPrincipal">
                 <h1>Lista de Administradores</h1>
                 <table>
@@ -24,7 +24,7 @@ function TelaListaAdm() {
                     </thead>
                     <tbody>
                         {listaAdministradores.map((adm) => (
-                            <tr key={adm.email}>
+                            <tr key={adm.id}>
                                 <td>{adm.nome}</td>
                                 <td>{adm.email}</td>
                                 <td><button onClick={()=>{
@@ -34,7 +34,7 @@ function TelaListaAdm() {
                                     <button onClick={()=>{
                                         const confirmar = window.confirm("Excluir administrador " + adm.nome + "?");
                                         if (confirmar) {
-                                            excluirAdministrador(adm.email);
+                                            excluirAdministrador(adm.id);
                                             setListaAdministadores(buscarAdministradores());
                                         }
                                     }}>Excluir</button>
