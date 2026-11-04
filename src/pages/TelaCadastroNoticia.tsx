@@ -56,8 +56,9 @@ function TelaCadastroNoticia() {
                     <div>
                         <label htmlFor="txtConteudo">Conteúdo</label>
                         <br/>
-                        <textarea id="txtConteudo" required value={conteudo} onChange={(e)=>{setConteudo(e.target.value)}}></textarea> 
+                        <textarea id="txtConteudo" rows={7} cols={100} required value={conteudo} onChange={(e)=>{setConteudo(e.target.value)}}></textarea> 
                     </div>
+                    <button type="submit">{noticia ? "Alterar" : "Cadastrar"}</button>
                 </form>
             </main>
         </>
