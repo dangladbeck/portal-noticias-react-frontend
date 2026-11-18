@@ -1,8 +1,8 @@
 import { useLocation } from "react-router";
 import MenuAdm from "../components/MenuAdm";
-import useAdministrador from "../hooks/useAdministrador";
+import useAdministrador from "../hooks/useAdministrador_pg";
 import { useEffect } from "react";
-import useLogin from "../hooks/useLogin";
+import useLogin from "../hooks/useLogin_pg";
 
 function TelaCadastroAdm() {
     const {verificarUsuarioLogado} = useLogin();

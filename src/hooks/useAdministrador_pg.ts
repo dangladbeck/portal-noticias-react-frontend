@@ -17,10 +17,14 @@ function useAdministrador() {
 
         try {
             // Enviar os dados para o servidor
-            const resposta = await axios.post("http://localhost:3000/login", {email, senha});
+            const resposta = await axios.post(API, {nome, email, senha});
             setMensagem(resposta.data.mensagem);
+            setTimeout(() => {
+                limparCampos();
+            }, 2000);
         } catch (error) {
-            
+            console.log(error);
+            setMensagem("Erro ao cadastrar administrador : " + error);
         }
 
         /*const administrador:Administrador = {id: crypto.randomUUID(), nome, email, senha};
